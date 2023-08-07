@@ -11,6 +11,12 @@
   width: 60%;
   margin: 0 auto;
 }
+.show-more {
+  display: none
+}
+.show-more.show {
+  display: none
+}
 
 @media screen and (max-width: 1025px) {
   .container {
@@ -33,6 +39,12 @@
     gap: 0 11px;
     margin: 11px 0;
     cursor: pointer;
+  }
+  ..show-more {
+    display: block
+  }
+  .show-more.show {
+    display: flex
   }
   .show-more.show span:last-child {
     transform: rotate(180deg)
