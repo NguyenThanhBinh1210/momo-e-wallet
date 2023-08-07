@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import "./styles/home.css";
 import mobileMomoImg from "../images/momo-mobile-money.png";
-import qrCodeBorderImg from "../images/qr-code-border.png";
+import qrCodeBorderImg from "../images/border.svg";
 import qrCodeBorderImg2 from "../images/Logo-MoMo-Square.png";
 import { AiOutlineQrcode } from "react-icons/ai";
 import CountdownTimer from "../components/OrderTime";
+import GradiantImg from "../images/qrcode-gradient.png"
 import { qr } from "../images/Qr";
 
 const Home = () => {
@@ -33,7 +34,7 @@ const Home = () => {
                 height="16px"
                 viewBox="-1 0 19 19"
                 xmlns="http://www.w3.org/2000/svg"
-                class="cf-icon-svg"
+                className="cf-icon-svg"
               >
                 <path d="M8.5 15.313a1.026 1.026 0 0 1-.728-.302l-6.8-6.8a1.03 1.03 0 0 1 1.455-1.456L8.5 12.828l6.073-6.073a1.03 1.03 0 0 1 1.455 1.456l-6.8 6.8a1.026 1.026 0 0 1-.728.302z" />
               </svg>
@@ -73,7 +74,10 @@ const Home = () => {
             <h1 className="qr-code-title">Quét mã QR để thanh toán</h1>
             <div className="qr-code-content">
               <img className="qr-code-img" src={qr} alt="" />
-              <img className="qr-code-border" src={qrCodeBorderImg} alt="" />
+              <div className="qr-code-border">
+              <img src={qrCodeBorderImg} alt="" />
+              <img className="animation" src={GradiantImg} alt="" />
+              </div>
               <div className="qr-code-wrapper">
                 <img className="icon-wrap" src={qrCodeBorderImg2} alt="" />
               </div>

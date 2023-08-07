@@ -1,6 +1,6 @@
 .home-page {
   margin: 30px auto;
-  width: 80%;
+  width: 100%;
   height: auto;
   /* background-color: antiquewhite; */
 }
@@ -8,14 +8,16 @@
 .order {
   display: flex;
   height: auto;
+  gap: 0 30px;
 }
 .order-content {
-  flex: 1;
+  width: 285px;
 }
 .order-info {
   width: 100%;
   border-radius: 12px;
   padding: 20px 25px;
+  box-sizing: border-box;
   background-color: #fff;
   border: 1px solid #e8e8e8;
 }
@@ -89,7 +91,7 @@
   color: #da2d99;
   font-weight: 700;
   box-sizing: border-box;
-  height: 61px;
+  height: 61px
 }
 .back-btn {
   text-decoration: none;
@@ -109,7 +111,6 @@
   flex: 3;
   height: 500px;
   border-radius: 12px;
-  margin-left: 90px;
   background: url("https://static.mservice.io/jk/momo2020/img/intro/qrcode-pattern.png")
       10px 10px no-repeat,
     linear-gradient(0deg, #c1177c, #e11b90);
@@ -134,17 +135,34 @@
   background-color: white;
   width: 260px;
   height: 260px;
+  position: relative
 }
 .qr-code-img {
-  position: relative;
+  position: absolute;
+  width: 85%;
+  height: 85%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .qr-code-border {
   position: absolute;
-  top: 151px;
-  width: 335px;
+  width: 265px;
+  height: 265px;
+  overflow: hidden;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.qr-code-border img {
+  width: 100%;
+  height: 100%
+}
+.qr-code-border .animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: moveItem 2.5s linear infinite;
 }
 .icon-wrap {
-  /* position: absolute; */
   width: 35px;
   z-index: 1000;
   width: 100%;
@@ -154,14 +172,19 @@
 
 .qr-code-wrapper {
   position: absolute;
-  width: 56px;
-  height: 56px;
-  top: 290px;
-  padding: 3px;
+  width: 46px;
+  height: 46px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 2.5px;
   background: white;
   border-radius: 1000rem;
 }
 
+.qr-code-wrapper .icon-wrap {
+  width: 100%;
+  height: 100%
+}
 .qr-code-node {
   color: #fff;
   display: flex;
@@ -192,11 +215,39 @@
   color: #333;
 }
 
+@keyframes moveItem {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 20%;
+  }
+}
+
 @media screen and (max-width: 769px) {
   .qr-code {
     margin-left: 0;
   }
   .home-page {
-    width: 98%;
+    width: 90%;
+  }
+  .qr-code-content {
+    width: 170px;
+    height: 170px;
+  }
+  .qr-code-content > img {
+    width: 170px;
+    height: 170px;
+  }
+  .qr-code-wrapper {
+    width: 30px;
+    height: 30px
+  }
+  .qr-code-border {
+    width: 90%;
+    height: 90%
+  }
+  .order-content {
+    width: 100%;
   }
 }
