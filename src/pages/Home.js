@@ -8,8 +8,13 @@ import CountdownTimer from "../components/OrderTime";
 import { qr } from "../images/Qr";
 
 const Home = () => {
-  // const qrCodeData = "https://example.com";
-
+  function generateRandomNumber() {
+    const min = 10 ** 12; 
+    const max = (10 ** 13) - 1; 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  const randomNumber = generateRandomNumber();
   return (
     <div className="container">
       <div className="home-page">
@@ -28,18 +33,14 @@ const Home = () => {
 
                 <li className="info-list-item">
                   <h5>Mã đơn hàng</h5>
-                  <p>OD1690769483334</p>
+                  <p>{`OD${randomNumber}`}</p>
                 </li>
                 <li className="info-list-item">
                   <h5>Mô tả</h5>
                   <p className="info-item-payment">
                     Thanh toan hoa don <br />{" "}
-                    <span className="code-payment">OD1690769483334</span>
+                    <span className="code-payment">{`OD${randomNumber}`}</span>
                   </p>
-                </li>
-                <li className="info-list-item">
-                  <h5>Số tiền</h5>
-                  <p className="order-price">10.000đ</p>
                 </li>
               </ul>
             </div>
@@ -68,7 +69,7 @@ const Home = () => {
             </div>
             <div className="support-payment">
               <p>Gặp khó khăn khi thanh toán?</p>
-              <span>Xem Hướng dẫn</span>
+              <span><a href="https://momo.vn/hoi-dap">Xem Hướng dẫn</a></span>
             </div>
           </div>
         </div>
