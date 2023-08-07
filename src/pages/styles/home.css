@@ -88,6 +88,8 @@
   background-color: #f3d4e6;
   color: #da2d99;
   font-weight: 700;
+  box-sizing: border-box;
+  height: 61px;
 }
 .back-btn {
   text-decoration: none;

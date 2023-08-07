@@ -22,7 +22,7 @@ const CountdownTimer = () => {
 
   const hours = Math.floor(secondsLeft / 3600);
   const minutes = Math.floor((secondsLeft % 3600) / 60);
-  const remainingSeconds = secondsLeft % 60;
+  const remainingSeconds = (secondsLeft % 60) < 10 ? `0${secondsLeft % 60}` : secondsLeft % 60 ;
 
   return (
     <div className="order-time">
