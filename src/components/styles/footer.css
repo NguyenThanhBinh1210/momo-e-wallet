@@ -1,0 +1,23 @@
+.footer {
+  width: 100vw;
+  height: 120px;
+  margin-top: auto;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.footer h5 {
+  color: #333;
+  font-size: 15px;
+}
+
+.footer-support {
+  display: flex;
+  color: #333;
+  align-items: center;
+}
+.footer-support span {
+  margin-left: 6px;
+}
