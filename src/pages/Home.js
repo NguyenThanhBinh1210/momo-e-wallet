@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./styles/home.css";
 import mobileMomoImg from "../images/momo-mobile-money.png";
 import qrCodeBorderImg from "../images/qr-code-border.png";
@@ -8,18 +8,38 @@ import CountdownTimer from "../components/OrderTime";
 import { qr } from "../images/Qr";
 
 const Home = () => {
+  const divRef = useRef(null)
+  const buttonRef = useRef(null)
   function generateRandomNumber() {
-    const min = 10 ** 12; 
-    const max = (10 ** 13) - 1; 
+    const min = 10 ** 12;
+    const max = 10 ** 13 - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  
   const randomNumber = generateRandomNumber();
+  const handleShow = () => {
+    divRef.current.classList.toggle("display-none")
+    buttonRef.current.classList.toggle("show")
+  }
   return (
     <div className="container">
       <div className="home-page">
         <div className="order">
-          <div className="order-content">
+          <div ref={buttonRef} className="show-more" onClick={handleShow}>
+            <span>Xem chi tiết</span>{" "}
+            <span>
+              <svg
+                fill="#000000"
+                width="16px"
+                height="16px"
+                viewBox="-1 0 19 19"
+                xmlns="http://www.w3.org/2000/svg"
+                class="cf-icon-svg"
+              >
+                <path d="M8.5 15.313a1.026 1.026 0 0 1-.728-.302l-6.8-6.8a1.03 1.03 0 0 1 1.455-1.456L8.5 12.828l6.073-6.073a1.03 1.03 0 0 1 1.455 1.456l-6.8 6.8a1.026 1.026 0 0 1-.728.302z" />
+              </svg>
+            </span>
+          </div>
+          <div ref={divRef} className="order-content display-none">
             <div className="order-info">
               <ul className="info-list">
                 <li className="info-list-item">
@@ -55,8 +75,7 @@ const Home = () => {
               <img className="qr-code-img" src={qr} alt="" />
               <img className="qr-code-border" src={qrCodeBorderImg} alt="" />
               <div className="qr-code-wrapper">
-
-              <img className="icon-wrap" src={qrCodeBorderImg2} alt="" />
+                <img className="icon-wrap" src={qrCodeBorderImg2} alt="" />
               </div>
             </div>
 
@@ -69,7 +88,9 @@ const Home = () => {
             </div>
             <div className="support-payment">
               <p>Gặp khó khăn khi thanh toán?</p>
-              <span><a href="https://momo.vn/hoi-dap">Xem Hướng dẫn</a></span>
+              <span>
+                <a href="https://momo.vn/hoi-dap">Xem Hướng dẫn</a>
+              </span>
             </div>
           </div>
         </div>
