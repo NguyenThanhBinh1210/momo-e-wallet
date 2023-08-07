@@ -22,8 +22,23 @@
 }
 
 @media screen and (max-width: 769px) {
+  .order {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .order-content {
-    display: none;
+    /* display: none; */
+  }
+  .order-info {
+    box-sizing: border-box;
+    margin-top: 15px;
+  }
+  .order-time {
+    box-sizing: border-box;
+    height: max-content !important;
+  }
+  .back-btn {
+    box-sizing: border-box;
   }
 }
 
