@@ -21,16 +21,18 @@ const CountdownTimer = () => {
   }, []);
 
   const hours = Math.floor(secondsLeft / 3600);
-  const minutes = Math.floor((secondsLeft % 3600) / 60);
+  const minutes = (Math.floor((secondsLeft % 3600) / 60)) >= 10 ? Math.floor((secondsLeft % 3600) / 60): `0${Math.floor((secondsLeft % 3600) / 60)}`;
   const remainingSeconds = (secondsLeft % 60) < 10 ? `0${secondsLeft % 60}` : secondsLeft % 60 ;
 
   return (
     <div className="order-time">
       <div className="order-time-box">
         <h3>Đơn hàng sẽ hết hạn sau:</h3>
+        <div>
         <button>{hours} Giờ</button>
         <button>{minutes} Phút</button>
         <button>{remainingSeconds} Giây</button>
+        </div>
       </div>
     </div>
   );

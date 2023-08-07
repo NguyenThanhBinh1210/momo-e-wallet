@@ -80,10 +80,14 @@
 .order-time h3 {
   margin-bottom: 18px;
 }
+.order-time-box > div:first-child {
+  display: flex;
+  height: 61px;
+}
 .order-time-box button {
-  padding: 10px 2px;
+  padding: 10px 5px;
   line-height: 22px;
-  width: 42px;
+  width: 45px;
   margin: 0 10px;
   border-radius: 8px;
   border: none;
@@ -91,7 +95,7 @@
   color: #da2d99;
   font-weight: 700;
   box-sizing: border-box;
-  height: 61px
+  height: 100%;
 }
 .back-btn {
   text-decoration: none;

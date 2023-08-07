@@ -5,7 +5,7 @@ import logo from "../images/Logo-MoMo-Square.png";
 const Header = () => {
   return (
     <div className="header">
-      <div className="container" style={{width: "75%"}}>
+      <div className="container header" >
         <div className="header-nav">
           <img className="logo" src={logo} alt="" />
           <h5 className="header-nav-title">Cổng thanh toán MoMo</h5>
