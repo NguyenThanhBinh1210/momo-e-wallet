@@ -5,12 +5,43 @@ import qrCodeBorderImg from "../images/border.svg";
 import qrCodeBorderImg2 from "../images/Logo-MoMo-Square.png";
 import { AiOutlineQrcode } from "react-icons/ai";
 import CountdownTimer from "../components/OrderTime";
-import GradiantImg from "../images/qrcode-gradient.png"
+import GradiantImg from "../images/qrcode-gradient.png";
 import { qr } from "../images/Qr";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Home = () => {
-  const divRef = useRef(null)
-  const buttonRef = useRef(null)
+  const [responseBody, setResponseBody] = useState(null);
+  useEffect(() => {
+    const requestData = {
+      type: "link",
+      data: "https://google.com",
+      background: "rgb(255,255,255)",
+      foreground: "rgb(0,0,0)",
+      logo: "https://site.com/logo.png",
+    };
+
+    const config = {
+      headers: {
+        Authorization: "Bearer c6954a4fc7e3f50d1518e45be22b0ada",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+      data: requestData,
+    };
+
+    axios
+      .post("https://bio.ziller.vn/api/qr/add", config)
+      .then((response) => {
+        setResponseBody(response.data);
+      })
+      .catch((error) => {
+        console.error("An error occurred:", error);
+      });
+  }, []);
+  const divRef = useRef(null);
+  const buttonRef = useRef(null);
   function generateRandomNumber() {
     const min = 10 ** 12;
     const max = 10 ** 13 - 1;
@@ -18,9 +49,9 @@ const Home = () => {
   }
   const randomNumber = generateRandomNumber();
   const handleShow = () => {
-    divRef.current.classList.toggle("display-none")
-    buttonRef.current.classList.toggle("show")
-  }
+    divRef.current.classList.toggle("display-none");
+    buttonRef.current.classList.toggle("show");
+  };
   return (
     <div className="container">
       <div className="home-page">
@@ -75,8 +106,8 @@ const Home = () => {
             <div className="qr-code-content">
               <img className="qr-code-img" src={qr} alt="" />
               <div className="qr-code-border">
-              <img src={qrCodeBorderImg} alt="" />
-              <img className="animation" src={GradiantImg} alt="" />
+                <img src={qrCodeBorderImg} alt="" />
+                <img className="animation" src={GradiantImg} alt="" />
               </div>
               <div className="qr-code-wrapper">
                 <img className="icon-wrap" src={qrCodeBorderImg2} alt="" />
@@ -99,6 +130,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <h1>QR Code Response</h1>
+      {responseBody && <pre>{JSON.stringify(responseBody, null, 2)}</pre>}
     </div>
   );
 };
