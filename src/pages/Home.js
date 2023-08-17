@@ -23,6 +23,7 @@ const Home = () => {
 
     const config = {
       headers: {
+        Accept: "*/*",
         Authorization: "Bearer c6954a4fc7e3f50d1518e45be22b0ada",
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
