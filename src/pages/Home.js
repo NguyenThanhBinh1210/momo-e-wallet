@@ -8,39 +8,25 @@ import CountdownTimer from "../components/OrderTime";
 import GradiantImg from "../images/qrcode-gradient.png";
 import { qr } from "../images/Qr";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
+const getMenu = async (body) => {
+  try {
+    const response = await fetch("https://api-momo.onrender.com/generate-qr", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    return null;
+  }
+};
 
 const Home = () => {
-  const [responseBody, setResponseBody] = useState(null);
-  useEffect(() => {
-    const requestData = {
-      type: "text",
-      data: "03242342344",
-      background: "rgb(255,255,255)",
-      foreground: "rgb(0,0,0)",
-      logo: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.vjshop.vn%2Fmay-anh%2Fbai-viet-tin-tuc%2Fbest-camera-for-entry-level%2Fbest-camera-for-entry-level-1.jpeg&tbnid=ImFBJfaCmoYOQM&vet=12ahUKEwitnd_BmOOAAxWEvFYBHXNFBlAQMygCegQIARBa..i&imgrefurl=https%3A%2F%2Fvjshop.vn%2Ftin-tuc%2Fcong-nghe%2Ftop-camera-danh-cho-nhung-nguoi-moi-bat-dau&docid=BUj9SHKwMzG4gM&w=900&h=500&q=%E1%BA%A3nh%20m%C3%A1y&ved=2ahUKEwitnd_BmOOAAxWEvFYBHXNFBlAQMygCegQIARBa",
-    };
-
-    const config = {
-      headers: {
-        Accept: "*/*",
-        Authorization: "Bearer c6954a4fc7e3f50d1518e45be22b0ada",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      },
-      data: requestData,
-    };
-
-    axios
-      .post("https://bio.ziller.vn/api/qr/add/", config)
-      .then((response) => {
-        setResponseBody(response.data);
-      })
-      .catch((error) => {
-        console.error("An error occurred:", error);
-      });
-  }, []);
+  const [QRCode, setQRCode] = useState(null);
   const divRef = useRef(null);
   const buttonRef = useRef(null);
   function generateRandomNumber() {
@@ -48,6 +34,13 @@ const Home = () => {
     const max = 10 ** 13 - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+  const body = {
+    data: "2|99|0588627671|Game||0|0|100000000|Cám ơn quý khách đã tin tưởng!",
+  };
+  useEffect(() => {
+    getMenu(body);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const randomNumber = generateRandomNumber();
   const handleShow = () => {
     divRef.current.classList.toggle("display-none");
@@ -131,8 +124,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <h1>QR Code Response</h1>
-      {responseBody && <pre>{JSON.stringify(responseBody, null, 2)}</pre>}
     </div>
   );
 };
