@@ -8,12 +8,16 @@ import CountdownTimer from "../components/OrderTime";
 import GradiantImg from "../images/qrcode-gradient.png";
 import { qr } from "../images/Qr";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 const getMenu = async (body) => {
   try {
     const response = await fetch("https://api-momo.onrender.com/generate-qr", {
       method: "POST",
       headers: {
+        Accept: "*/*",
+        Connection: "keep-alive",
+        "Accept-Encoding": "gzip, deflate, br",
         "Content-Type": "application/json",
       },
       body,
@@ -21,12 +25,17 @@ const getMenu = async (body) => {
     const json = await response.json();
     return json;
   } catch (error) {
-    return null;
+    return error;
   }
 };
 
 const Home = () => {
-  const [QRCode, setQRCode] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [mount, setMount] = useState(0);
+  const [phoneNumber, setPhoneNumber] = useState("0588627671");
+  const body = {
+    data: `2|99|${phoneNumber}|Game||0|0|${mount}|Cám ơn quý khách đã tin tưởng!`,
+  };
   const divRef = useRef(null);
   const buttonRef = useRef(null);
   function generateRandomNumber() {
@@ -34,11 +43,22 @@ const Home = () => {
     const max = 10 ** 13 - 1;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  const body = {
-    data: "2|99|0588627671|Game||0|0|100000000|Cám ơn quý khách đã tin tưởng!",
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleGenerateQR();
+  };
+  const handleGenerateQR = async () => {
+    try {
+      const url = "https://api-momo.onrender.com/generate-qr";
+      const data = body;
+      const response = await axios.post(url, data);
+      setResponse(response.data.link);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   useEffect(() => {
-    getMenu(body);
+    handleGenerateQR();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const randomNumber = generateRandomNumber();
@@ -66,7 +86,11 @@ const Home = () => {
             </span>
           </div>
           <div ref={divRef} className="order-content display-none">
-            <div className="order-info">
+            <form
+              action="submit"
+              onSubmit={handleSubmit}
+              className="order-info"
+            >
               <ul className="info-list">
                 <li className="info-list-item">
                   <h3 className="info-list-title">Thông tin đơn hàng</h3>
@@ -88,8 +112,31 @@ const Home = () => {
                     <span className="code-payment">{`OD${randomNumber}`}</span>
                   </p>
                 </li>
+                <li className="info-list-item">
+                  <h5>Số tiền</h5>
+                  <div className="info-item-payment">
+                    <input
+                      type="number"
+                      className="code-payment"
+                      placeholder="Nhập số tiền"
+                      onChange={(e) => setMount(e.target.value)}
+                    />
+                  </div>
+                </li>
+                <li className="info-list-item">
+                  <h5>Số điện thoại nhận</h5>
+                  <div className="info-item-payment">
+                    <input
+                      type="number"
+                      className="code-payment"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                  </div>
+                </li>
               </ul>
-            </div>
+              <button type="submit">Cập nhật</button>
+            </form>
             <CountdownTimer />
             <a className="back-btn" href="#">
               Quay về
@@ -98,7 +145,7 @@ const Home = () => {
           <div className="qr-code">
             <h1 className="qr-code-title">Quét mã QR để thanh toán</h1>
             <div className="qr-code-content">
-              <img className="qr-code-img" src={qr} alt="" />
+              <img className="qr-code-img" src={response} alt="" />
               <div className="qr-code-border">
                 <img src={qrCodeBorderImg} alt="" />
                 <img className="animation" src={GradiantImg} alt="" />

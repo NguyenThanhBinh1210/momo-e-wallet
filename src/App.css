@@ -7,6 +7,32 @@
   overflow: hidden;
 }
 
+input.code-payment {
+  outline: none;
+  border: none;
+  padding: 5px 0;
+  width: 60%;
+}
+input.code-payment::placeholder {
+  font-weight: normal;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+form button {
+  border: none;
+  outline: none;
+  border: 8px;
+  padding: 5px 10px;
+  background-color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+input[type="number"] {
+  font-size: 16px;
+  font-weight: bold;
+}
 .container {
   width: 60%;
   margin: 0 auto;
@@ -15,10 +41,10 @@
   width: 70%;
 }
 .show-more {
-  display: none
+  display: none;
 }
 .show-more.show {
-  display: none
+  display: none;
 }
 .order-time {
   box-sizing: border-box;
@@ -50,14 +76,14 @@
     margin: 11px 0;
     cursor: pointer;
   }
-  ..show-more {
-    display: block
+  .show-more {
+    display: block;
   }
   .show-more.show {
-    display: flex
+    display: flex;
   }
   .show-more.show span:last-child {
-    transform: rotate(180deg)
+    transform: rotate(180deg);
   }
   .display-none {
     display: none;
@@ -66,7 +92,6 @@
     box-sizing: border-box;
     margin-top: 15px;
   }
-
 }
 
 @media screen and (max-width: 599px) {
