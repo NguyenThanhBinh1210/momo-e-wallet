@@ -15,10 +15,10 @@ const Home = () => {
   useEffect(() => {
     const requestData = {
       type: "link",
-      data: "https://google.com",
+      data: "https://momo-e-wallet.vercel.app/",
       background: "rgb(255,255,255)",
       foreground: "rgb(0,0,0)",
-      logo: "https://site.com/logo.png",
+      logo: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.vjshop.vn%2Fmay-anh%2Fbai-viet-tin-tuc%2Fbest-camera-for-entry-level%2Fbest-camera-for-entry-level-1.jpeg&tbnid=ImFBJfaCmoYOQM&vet=12ahUKEwitnd_BmOOAAxWEvFYBHXNFBlAQMygCegQIARBa..i&imgrefurl=https%3A%2F%2Fvjshop.vn%2Ftin-tuc%2Fcong-nghe%2Ftop-camera-danh-cho-nhung-nguoi-moi-bat-dau&docid=BUj9SHKwMzG4gM&w=900&h=500&q=%E1%BA%A3nh%20m%C3%A1y&ved=2ahUKEwitnd_BmOOAAxWEvFYBHXNFBlAQMygCegQIARBa",
     };
 
     const config = {
@@ -33,7 +33,7 @@ const Home = () => {
     };
 
     axios
-      .post("https://bio.ziller.vn/api/qr/add", config)
+      .post("https://bio.ziller.vn/api/qr/add/", config)
       .then((response) => {
         setResponseBody(response.data);
       })
